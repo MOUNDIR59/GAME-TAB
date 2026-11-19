@@ -1,0 +1,15 @@
+# Top 3 local du serveur (recréé automatiquement)
+serveur/meilleurs_scores.json
+meilleurs_scores.json
+
+# Python
+__pycache__/
+*.pyc
+
+# Arduino / éditeurs
+build/
+.vscode/
+*.bak
+~$*.xlsx
+Thumbs.db
+.DS_Store
