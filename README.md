@@ -25,6 +25,7 @@ Projet pédagogique, filière SEE5, année 2026/2027, réalisé avec une démarc
 - [Installation](#installation) (avec le [Lisez-moi du multijoueur](#lisez-moi--mode-multijoueur-en-3-étapes))
 - [Utilisation](#utilisation)
 - [Exigences](#exigences)
+- [Cybersécurité](#cybersécurité)
 - [Dépannage](#dépannage)
 
 ---
@@ -65,6 +66,8 @@ GAME-TAB/
 └── docs/
     ├── GAME_TAB_SysML_v2.xlsx         dossier SysML complet (cahier des charges, diagrammes, tâches)
     ├── logo.png
+    ├── securite/
+    │   └── Rapport_Pentest_GAME_TAB.pdf   rapport de test d'intrusion (Red Team / Blue Team)
     └── architecture/
         ├── 01_exigences_req.png       diagramme d'exigences (req)
         ├── 02_contexte_bdd-ctx.png    diagramme de contexte (bdd-ctx)
@@ -259,6 +262,32 @@ la feuille **CdC** de [`docs/GAME_TAB_SysML_v2.xlsx`](docs/GAME_TAB_SysML_v2.xls
 | REQ-31 | Bonus aux mêmes endroits partout | Graine choisie par le serveur |
 | REQ-34 | Rester fiable malgré les pertes Wi-Fi | Messages importants répétés |
 | REQ-35 | Rester jouable seul sans Wi-Fi, gérer la perte d'un joueur | Joueur muet > 8 s : parti |
+
+---
+
+## Cybersécurité
+
+Le mode multijoueur a fait l'objet d'un **test d'intrusion** (évaluation Red Team / Blue Team, en laboratoire isolé) :
+**[Rapport de test d'intrusion (PDF)](docs/securite/Rapport_Pentest_GAME_TAB.pdf)**.
+
+Périmètre : Wi-Fi 2,4 GHz partagé, protocole UDP 4210 du jeu, serveur admin Python (HTTP 8080) et tablettes Tab5.
+Le jeu en solo n'est pas concerné : il ne communique avec rien. Niveau de risque global : **élevé**
+(2 vulnérabilités critiques, 4 élevées, 3 moyennes).
+
+| ID | Vulnérabilité | Sévérité | Remédiation principale | Priorité |
+|---|---|---|---|---|
+| VULN-01 | Surface d'attaque exposée (reconnaissance) | Moyenne | Réseau de jeu séparé, mot de passe aussi sur `GET /api/state` | P3 |
+| VULN-02 | Wi-Fi faible / accès réseau non maîtrisé | Élevée | Mot de passe long et aléatoire, hors du code ; isolation des clients | P2 |
+| VULN-03 | Protocole UDP sans authentification | **Critique** | Secret partagé + signature HMAC horodatée de chaque message | P1 |
+| VULN-04 | Trafic UDP en clair (interception) | Élevée | Chiffrer et authentifier les messages (DTLS ou chiffrement + HMAC) | P2 |
+| VULN-05 | Usurpation de joueur et injection de résultat | **Critique** | Lier chaque id à sa clé / son adresse ; contrôle de plausibilité des scores | P1 |
+| VULN-06 | Faux serveur / détournement du salon | Élevée | Authentifier le serveur auprès des tablettes (clé pré-partagée) | P2 |
+| VULN-07 | Déni de service (flood UDP, salon saturé) | Moyenne | Limiter le débit par source, bannissement temporaire | P3 |
+| VULN-08 | Injection dans la page admin (XSS via id joueur) | Moyenne | `textContent` au lieu de `innerHTML`, id limité à `[A-Fa-f0-9]` | P3 |
+| VULN-09 | Admin non protégé et absence de journalisation | Élevée | Mot de passe obligatoire dans l'en-tête, journal horodaté des actions | P2 |
+
+En attendant ces corrections, pour une partie : utiliser un réseau Wi-Fi réservé au jeu avec un mot de passe fort,
+lancer le serveur avec `--mdp`, et n'ouvrir la page admin que sur le PC de l'organisateur.
 
 ---
 
