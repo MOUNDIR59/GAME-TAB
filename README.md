@@ -61,8 +61,7 @@ GAME-TAB/
 │   └── GAME_TAB_MULTI/
 │       └── GAME_TAB_MULTI.ino         code source du jeu (C++ / Arduino, M5Stack Tab5)
 ├── serveur/
-│   ├── serveur_admin.py               code source du serveur admin multijoueur (Python 3)
-│   └── LISEZMOI.txt                   mode d'emploi rapide du multijoueur
+│   └── serveur_admin.py               code source du serveur admin multijoueur (Python 3)
 └── docs/
     ├── GAME_TAB_SysML_v2.xlsx         dossier SysML complet (cahier des charges, diagrammes, tâches)
     ├── logo.png
@@ -132,8 +131,6 @@ flowchart LR
 ## Installation
 
 ### Lisez-moi : mode multijoueur en 3 étapes
-
-*(contenu du fichier [`serveur/LISEZMOI.txt`](serveur/LISEZMOI.txt))*
 
 **1. Sur un PC** ([Python 3](https://www.python.org/downloads/) installé) relié au **même Wi-Fi** que les tablettes (2,4 GHz) :
 
