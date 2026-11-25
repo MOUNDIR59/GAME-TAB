@@ -1,0 +1,23 @@
+GAME TAB - mode MULTIJOUEUR avec serveur web admin
+
+1. Sur un PC (Python 3 installé) relié au MÊME Wi-Fi que les tablettes (2,4 GHz) :
+       python3 serveur_admin.py          (Windows : py serveur_admin.py)
+   Le programme affiche l'adresse de la page admin, par exemple http://192.168.1.20:8080
+   Option : --mdp MOTDEPASSE pour protéger les boutons (adresse ...:8080/?mdp=MOTDEPASSE).
+   Si les tablettes ne trouvent pas le serveur : autoriser Python dans le pare-feu du PC
+   (réseaux privés, UDP entrant, port 4210).
+
+2. Sur chaque tablette : téléverser GAME_TAB_MULTI.ino, puis ACCUEIL > MULTIJOUEUR.
+   La tablette se connecte au Wi-Fi, trouve le serveur toute seule et attend dans le salon.
+
+3. Sur la page admin : choisir le niveau, appuyer sur DÉMARRER.
+   Compte à rebours 3-2-1 sur toutes les tablettes, puis la course.
+   Pendant la course : classement en direct. ARRÊTER LA PARTIE termine tout de suite.
+   EXCLURE retire un joueur. À la fin, chaque tablette affiche le classement.
+   Pour une nouvelle manche : les joueurs appuient sur REJOUER (retour au salon).
+
+Jusqu'à 8 joueurs. Le Wi-Fi et le mot de passe se règlent en haut du .ino.
+
+Top 3 des meilleurs joueurs : la page admin affiche un podium. Chaque fin de partie le met à jour
+(meilleur score de chaque joueur, à égalité le plus rapide). Il est gardé dans meilleurs_scores.json,
+à côté de serveur_admin.py, donc il reste après un redémarrage. Bouton « Remettre à zéro » pour l'effacer.

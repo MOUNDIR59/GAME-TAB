@@ -61,7 +61,8 @@ GAME-TAB/
 │   └── GAME_TAB_MULTI/
 │       └── GAME_TAB_MULTI.ino         code source du jeu (C++ / Arduino, M5Stack Tab5)
 ├── serveur/
-│   └── serveur_admin.py               code source du serveur admin multijoueur (Python 3)
+│   ├── serveur_admin.py               code source du serveur admin multijoueur (Python 3)
+│   └── LISEZMOI.txt                   mode d'emploi rapide du multijoueur
 └── docs/
     ├── GAME_TAB_SysML_v2.xlsx         dossier SysML complet (cahier des charges, diagrammes, tâches)
     ├── logo.png
@@ -129,6 +130,8 @@ flowchart LR
 ---
 
 ## Installation
+
+> Mode d'emploi rapide du multijoueur : voir aussi [`serveur/LISEZMOI.txt`](serveur/LISEZMOI.txt).
 
 ### Matériel
 
