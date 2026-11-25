@@ -27,6 +27,7 @@ Projet pédagogique, filière SEE5, année 2026/2027, réalisé avec une démarc
 - [Exigences](#exigences)
 - [Cybersécurité](#cybersécurité)
 - [Dépannage](#dépannage)
+- [Équipe](#équipe)
 
 ---
 
@@ -295,3 +296,12 @@ lancer le serveur avec `--mdp`, et n'ouvrir la page admin que sur le PC de l'org
 
 Voir le guide complet : **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** (compilation, affichage, gestes, Wi-Fi,
 pare-feu, serveur, partie multijoueur).
+
+---
+
+## Équipe
+
+| Membre | GitHub |
+|---|---|
+| MOUNDIR59 | [github.com/MOUNDIR59](https://github.com/MOUNDIR59) |
+| Laurine3500 | [github.com/Laurine3500](https://github.com/Laurine3500) |
