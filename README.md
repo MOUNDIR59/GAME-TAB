@@ -22,7 +22,7 @@ Projet pédagogique, filière SEE5, année 2026/2027, réalisé avec une démarc
 - [Fonctionnalités](#fonctionnalités)
 - [Contenu du dépôt](#contenu-du-dépôt)
 - [Diagrammes d'architecture](#diagrammes-darchitecture)
-- [Installation](#installation)
+- [Installation](#installation) (avec le [Lisez-moi du multijoueur](#lisez-moi--mode-multijoueur-en-3-étapes))
 - [Utilisation](#utilisation)
 - [Exigences](#exigences)
 - [Dépannage](#dépannage)
@@ -131,12 +131,44 @@ flowchart LR
 
 ## Installation
 
-> Mode d'emploi rapide du multijoueur : voir aussi [`serveur/LISEZMOI.txt`](serveur/LISEZMOI.txt).
+### Lisez-moi : mode multijoueur en 3 étapes
+
+*(contenu du fichier [`serveur/LISEZMOI.txt`](serveur/LISEZMOI.txt))*
+
+**1. Sur un PC** ([Python 3](https://www.python.org/downloads/) installé) relié au **même Wi-Fi** que les tablettes (2,4 GHz) :
+
+```bash
+python3 serveur_admin.py
+```
+
+(Windows : `py serveur_admin.py`)
+
+- Le programme affiche l'adresse de la page admin, par exemple `http://192.168.1.20:8080`.
+- Option : `--mdp MOTDEPASSE` pour protéger les boutons (adresse `...:8080/?mdp=MOTDEPASSE`).
+- Si les tablettes ne trouvent pas le serveur : autoriser Python dans le pare-feu du PC
+  (réseaux privés, UDP entrant, port 4210).
+
+**2. Sur chaque tablette** : téléverser `GAME_TAB_MULTI.ino`, puis **ACCUEIL > MULTIJOUEUR**.
+La tablette se connecte au Wi-Fi, trouve le serveur toute seule et attend dans le salon.
+
+**3. Sur la page admin** : choisir le niveau, appuyer sur **DÉMARRER**.
+- Compte à rebours 3-2-1 sur toutes les tablettes, puis la course.
+- Pendant la course : classement en direct. **ARRÊTER LA PARTIE** termine tout de suite.
+- **EXCLURE** retire un joueur. À la fin, chaque tablette affiche le classement.
+- Pour une nouvelle manche : les joueurs appuient sur **REJOUER** (retour au salon).
+
+Jusqu'à 8 joueurs. Le Wi-Fi et le mot de passe se règlent en haut du `.ino`.
+
+**Top 3 des meilleurs joueurs** : la page admin affiche un podium. Chaque fin de partie le met à jour
+(meilleur score de chaque joueur, à égalité le plus rapide). Il est gardé dans `meilleurs_scores.json`,
+à côté de `serveur_admin.py`, donc il reste après un redémarrage. Bouton **« Remettre à zéro »** pour l'effacer.
+
+Les étapes détaillées sont ci-dessous.
 
 ### Matériel
 
 - 1 à 8 tablettes **M5Stack Tab5** (batterie NP-F550 pour jouer sans câble).
-- Pour le multijoueur : un **PC** avec Python 3 et un réseau **Wi-Fi 2,4 GHz** commun
+- Pour le multijoueur : un **PC** avec [Python 3](https://www.python.org/downloads/) et un réseau **Wi-Fi 2,4 GHz** commun
   (box ou partage de connexion d'un téléphone).
 
 ### 1. Le jeu sur la tablette
@@ -154,7 +186,11 @@ flowchart LR
 
 ### 2. Le serveur admin sur le PC (multijoueur)
 
-Aucune bibliothèque à installer : seulement Python 3. Le PC doit être sur **le même Wi-Fi** que les tablettes.
+Aucune bibliothèque à installer : seulement **Python 3**. Le PC doit être sur **le même Wi-Fi** que les tablettes.
+
+> **Python 3 n'est pas installé ?** Le télécharger ici : **[python.org/downloads](https://www.python.org/downloads/)**.
+> Sous Windows, cocher **« Add python.exe to PATH »** au début de l'installation.
+> Pour vérifier : ouvrir un terminal et taper `py --version` (Windows) ou `python3 --version` (Linux / macOS).
 
 ```bash
 cd serveur
